@@ -2,20 +2,23 @@
 
 import { useState } from "react";
 import { subirFoto } from "@/app/actions/fotos";
+import { useToast } from "@/lib/toast";
 
 export default function SubirFotoForm() {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { showToast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     try {
       await subirFoto(new FormData(e.currentTarget));
+      showToast("¡Foto subida!", "success");
       setOpen(false);
       (e.target as HTMLFormElement).reset();
-    } catch {
-      alert("Error al subir la foto");
+    } catch (err) {
+      showToast(err instanceof Error ? err.message : "Error al subir la foto", "error");
     } finally {
       setLoading(false);
     }

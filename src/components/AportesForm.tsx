@@ -2,23 +2,24 @@
 
 import { useState } from "react";
 import { crearAporte } from "@/app/actions/aportes";
+import NumberInput from "./NumberInput";
+import { useToast } from "@/lib/toast";
 import type { Meta } from "@/types";
 
 export default function AportesForm({ metas }: { metas: Meta[] }) {
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const { showToast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    setSuccess(false);
 
     try {
       await crearAporte(new FormData(e.currentTarget));
-      setSuccess(true);
+      showToast("¡Aporte registrado!", "success");
       (e.target as HTMLFormElement).reset();
-    } catch {
-      alert("Error al crear el aporte");
+    } catch (err) {
+      showToast(err instanceof Error ? err.message : "Error al crear el aporte", "error");
     } finally {
       setLoading(false);
     }
@@ -39,20 +40,7 @@ export default function AportesForm({ metas }: { metas: Meta[] }) {
         <h3 className="font-bold text-text text-lg">Nuevo aporte</h3>
       </div>
 
-      <div>
-        <label className="block text-sm font-medium text-text mb-1">
-          Monto ($)
-        </label>
-        <input
-          type="number"
-          name="monto"
-          step="0.01"
-          min="0.01"
-          required
-          placeholder="0.00"
-          className="input-field"
-        />
-      </div>
+      <NumberInput name="monto" label="Monto ($)" />
 
       <div>
         <label className="block text-sm font-medium text-text mb-1">
@@ -91,12 +79,6 @@ export default function AportesForm({ metas }: { metas: Meta[] }) {
       >
         {loading ? "Guardando..." : "Agregar aporte"}
       </button>
-
-      {success && (
-        <p className="text-accent text-sm text-center font-medium animate-fade-in">
-          ¡Aporte registrado!
-        </p>
-      )}
     </form>
   );
 }

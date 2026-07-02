@@ -86,7 +86,7 @@ export default async function DashboardPage() {
         <div className="mt-4 grid grid-cols-3 gap-4 text-center">
           <div className="bg-surface rounded-xl p-3 border border-border">
             <p className="text-2xl font-extrabold text-primary">
-              ${totalAportado.toLocaleString()}
+              ${totalAportado.toLocaleString("es-ES")}
             </p>
             <p className="text-xs text-text-secondary font-medium">
               Ahorrado
@@ -94,7 +94,7 @@ export default async function DashboardPage() {
           </div>
           <div className="bg-surface rounded-xl p-3 border border-border">
             <p className="text-2xl font-extrabold text-accent">
-              ${totalObjetivo.toLocaleString()}
+              ${totalObjetivo.toLocaleString("es-ES")}
             </p>
             <p className="text-xs text-text-secondary font-medium">
               Meta total
@@ -102,7 +102,7 @@ export default async function DashboardPage() {
           </div>
           <div className="bg-surface rounded-xl p-3 border border-border">
             <p className="text-2xl font-extrabold" style={{ color: falta > 0 ? "var(--color-warning)" : "var(--color-success)" }}>
-              {falta > 0 ? `$${falta.toLocaleString()}` : "¡Meta!"}
+              {falta > 0 ? `$${falta.toLocaleString("es-ES")}` : "¡Meta!"}
             </p>
             <p className="text-xs text-text-secondary font-medium">
               {falta > 0 ? "Falta" : "Cumplida"}

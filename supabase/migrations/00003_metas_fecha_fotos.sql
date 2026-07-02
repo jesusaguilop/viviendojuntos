@@ -1,5 +1,5 @@
 -- Agregar fecha límite a metas
-alter table metas add column fecha_limite date;
+alter table metas add column if not exists fecha_limite date;
 
 -- Bucket de Storage para fotos
 insert into storage.buckets (id, name, public, avif_autodetection)

@@ -29,7 +29,7 @@ export default async function AportesPage() {
         {totalAportado > 0 && (
           <div className="text-right">
             <p className="text-lg font-extrabold text-primary">
-              ${totalAportado.toLocaleString()}
+              ${totalAportado.toLocaleString("es-ES")}
             </p>
             <p className="text-xs text-text-secondary">total ahorrado</p>
           </div>
@@ -81,7 +81,7 @@ export default async function AportesPage() {
                       <div>
                         <div className="flex items-center gap-2 flex-wrap">
                           <span className="font-bold text-text text-lg">
-                            ${Number(a.monto).toLocaleString()}
+                            ${Number(a.monto).toLocaleString("es-ES")}
                           </span>
                           <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">
                             {a.metas?.nombre}

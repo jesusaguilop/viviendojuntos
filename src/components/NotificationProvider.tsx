@@ -67,7 +67,7 @@ export default function NotificationProvider({
 
           showNotification({
             title: "💰 Nuevo aporte",
-            body: `${nombre} aportó $${Number(newAporte.monto).toLocaleString()} a ${metaNombre}`,
+            body: `${nombre} aportó $${Number(newAporte.monto).toLocaleString("es-ES")} a ${metaNombre}`,
             type: "aporte",
           });
         },

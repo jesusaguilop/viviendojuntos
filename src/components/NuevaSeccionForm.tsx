@@ -25,12 +25,13 @@ export default function NuevaSeccionForm() {
         <input
           type="number"
           name="orden"
-          placeholder="Orden"
-          className="input-field w-20"
+          placeholder="Ord"
+          className="input-field w-16 text-center"
+          min="0"
         />
         <button
           type="submit"
-          className="btn-accent"
+          className="btn-accent whitespace-nowrap"
         >
           Crear
         </button>

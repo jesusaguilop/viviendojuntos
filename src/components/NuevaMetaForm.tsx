@@ -2,23 +2,24 @@
 
 import { useState } from "react";
 import { crearMeta } from "@/app/actions/metas";
+import NumberInput from "./NumberInput";
+import { useToast } from "@/lib/toast";
 
 export default function NuevaMetaForm() {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const { showToast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    setSuccess(false);
     try {
       await crearMeta(new FormData(e.currentTarget));
-      setSuccess(true);
+      showToast("¡Meta creada!", "success");
       (e.target as HTMLFormElement).reset();
-      setTimeout(() => setOpen(false), 1200);
-    } catch {
-      alert("Error al crear la meta");
+      setTimeout(() => setOpen(false), 800);
+    } catch (err) {
+      showToast(err instanceof Error ? err.message : "Error al crear la meta", "error");
     } finally {
       setLoading(false);
     }
@@ -79,19 +80,13 @@ export default function NuevaMetaForm() {
                     className="input-field"
                   />
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-text mb-1">Monto objetivo ($)</label>
-                  <input
-                    type="number"
+                <div className="col-span-2 sm:col-span-1">
+                  <NumberInput
                     name="monto_objetivo"
-                    step="0.01"
-                    min="0.01"
-                    required
-                    placeholder="0.00"
-                    className="input-field"
+                    label="Monto objetivo ($)"
                   />
                 </div>
-                <div>
+                <div className="col-span-2 sm:col-span-1">
                   <label className="block text-sm font-medium text-text mb-1">Fecha límite</label>
                   <input
                     type="date"
@@ -126,12 +121,6 @@ export default function NuevaMetaForm() {
                   Cancelar
                 </button>
               </div>
-
-              {success && (
-                <p className="text-accent text-sm text-center font-medium animate-fade-in">
-                  ¡Meta creada!
-                </p>
-              )}
             </form>
           </div>
         </div>

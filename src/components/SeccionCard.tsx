@@ -121,12 +121,12 @@ export default function SeccionCard({
                     <div className="flex items-center gap-2 text-xs text-text-secondary mt-0.5 flex-wrap">
                       {producto.precio_estimado !== null && (
                         <span>
-                          Est: ${Number(producto.precio_estimado).toLocaleString()}
+                          Est: ${Number(producto.precio_estimado).toLocaleString("es-ES")}
                         </span>
                       )}
                       {producto.precio_real !== null && (
                         <span>
-                          Real: ${Number(producto.precio_real).toLocaleString()}
+                          Real: ${Number(producto.precio_real).toLocaleString("es-ES")}
                         </span>
                       )}
                       {producto.notas && (

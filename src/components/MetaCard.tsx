@@ -27,10 +27,10 @@ export default function MetaCard({ meta }: { meta: MetaConAportes }) {
         </div>
         <div className="text-right shrink-0 ml-2">
           <span className="font-bold text-primary">
-            ${meta.total_aportado.toLocaleString()}
+            ${meta.total_aportado.toLocaleString("es-ES")}
           </span>
           <span className="text-text-secondary text-xs block">
-            de ${meta.monto_objetivo.toLocaleString()}
+            de ${meta.monto_objetivo.toLocaleString("es-ES")}
           </span>
           {meta.fecha_limite && (
             <span className="text-text-secondary text-xs block mt-0.5">
@@ -55,7 +55,7 @@ export default function MetaCard({ meta }: { meta: MetaConAportes }) {
               <div key={nombre} className="flex items-center justify-between text-sm">
                 <span className="font-medium text-text">{nombre}</span>
                 <span className="text-text-secondary">
-                  ${monto.toLocaleString()}
+                  ${monto.toLocaleString("es-ES")}
                 </span>
               </div>
             ))}

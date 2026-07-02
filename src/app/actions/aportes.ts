@@ -10,7 +10,8 @@ export async function crearAporte(formData: FormData) {
   } = await supabase.auth.getUser();
   if (!user) throw new Error("No autenticado");
 
-  const monto = parseFloat(formData.get("monto") as string);
+  const montoRaw = (formData.get("monto") as string).replace(/\./g, "").replace(",", ".");
+  const monto = parseFloat(montoRaw);
   const meta_id = formData.get("meta_id") as string;
   const nota = (formData.get("nota") as string) || null;
 
