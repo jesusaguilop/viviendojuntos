@@ -38,14 +38,17 @@ export default function SubirFotoForm() {
           Subir foto
         </button>
       ) : (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-fade-in">
+        <div
+          className="fixed inset-0 z-50 flex items-end md:items-center justify-center bg-black/40 backdrop-blur-sm animate-fade-in"
+          onClick={() => setOpen(false)}
+        >
           <div
-            className="bg-surface rounded-2xl border border-border p-6 w-full max-w-md shadow-2xl animate-slide-up"
+            className="bg-surface rounded-t-2xl md:rounded-2xl border border-border w-full md:max-w-md max-h-[90vh] overflow-y-auto p-5 md:p-6 shadow-2xl animate-slide-up md:mx-4"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between mb-5">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-accent to-primary flex items-center justify-center text-white font-bold">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-accent to-primary flex items-center justify-center text-white font-bold shrink-0">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
                     <circle cx="8.5" cy="8.5" r="1.5" />
@@ -77,7 +80,7 @@ export default function SubirFotoForm() {
                   name="file"
                   accept="image/*"
                   required
-                  className="input-field file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:bg-primary file:text-white file:text-sm file:font-medium file:cursor-pointer"
+                  className="input-field file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-primary file:text-white file:text-sm file:font-medium file:cursor-pointer"
                 />
               </div>
               <div>
@@ -90,18 +93,10 @@ export default function SubirFotoForm() {
                 />
               </div>
               <div className="flex gap-2">
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="btn-primary flex-1"
-                >
+                <button type="submit" disabled={loading} className="btn-primary flex-1">
                   {loading ? "Subiendo..." : "Subir foto"}
                 </button>
-                <button
-                  type="button"
-                  onClick={() => setOpen(false)}
-                  className="btn-outline"
-                >
+                <button type="button" onClick={() => setOpen(false)} className="btn-outline">
                   Cancelar
                 </button>
               </div>

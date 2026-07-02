@@ -28,16 +28,16 @@ export default function AportesForm({ metas }: { metas: Meta[] }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-surface rounded-2xl border border-border p-5 space-y-4"
+      className="bg-surface rounded-2xl border border-border p-4 md:p-5 space-y-3 md:space-y-4"
     >
-      <div className="flex items-center gap-2 mb-2">
-        <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
+      <div className="flex items-center gap-2 mb-1 md:mb-2">
+        <div className="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
             <line x1="12" y1="1" x2="12" y2="23" />
             <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
           </svg>
         </div>
-        <h3 className="font-bold text-text text-lg">Nuevo aporte</h3>
+        <h3 className="font-bold text-text text-base md:text-lg">Nuevo aporte</h3>
       </div>
 
       <NumberInput name="monto" label="Monto ($)" />
@@ -46,11 +46,7 @@ export default function AportesForm({ metas }: { metas: Meta[] }) {
         <label className="block text-sm font-medium text-text mb-1">
           Meta
         </label>
-        <select
-          name="meta_id"
-          required
-          className="input-field"
-        >
+        <select name="meta_id" required className="input-field">
           <option value="">Seleccionar meta</option>
           {metas.map((meta) => (
             <option key={meta.id} value={meta.id}>
@@ -72,11 +68,7 @@ export default function AportesForm({ metas }: { metas: Meta[] }) {
         />
       </div>
 
-      <button
-        type="submit"
-        disabled={loading}
-        className="btn-primary w-full"
-      >
+      <button type="submit" disabled={loading} className="btn-primary w-full">
         {loading ? "Guardando..." : "Agregar aporte"}
       </button>
     </form>

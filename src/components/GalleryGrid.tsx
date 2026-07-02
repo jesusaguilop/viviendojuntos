@@ -15,7 +15,7 @@ export default function GalleryGrid({
 
   return (
     <>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
         {fotos.map((foto) => (
           <div
             key={foto.id}
@@ -30,7 +30,7 @@ export default function GalleryGrid({
                 loading="lazy"
               />
             </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity md:flex hidden">
               <div className="absolute bottom-0 left-0 right-0 p-3">
                 {foto.descripcion && (
                   <p className="text-white text-sm font-medium truncate">
@@ -45,41 +45,48 @@ export default function GalleryGrid({
             {foto.usuario_id === userId && (
               <form
                 action={eliminarFoto.bind(null, foto.id, foto.url)}
-                className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                className="absolute top-1.5 right-1.5 md:opacity-0 md:group-hover:opacity-100 transition-opacity"
                 onClick={(e) => e.stopPropagation()}
               >
                 <button
                   type="submit"
-                  className="w-7 h-7 rounded-full bg-black/60 text-white flex items-center justify-center text-sm hover:bg-danger transition cursor-pointer"
+                  className="w-7 h-7 rounded-full bg-black/60 text-white flex items-center justify-center text-sm hover:bg-danger transition cursor-pointer shadow-lg"
                 >
                   ×
                 </button>
               </form>
             )}
+            <div className="md:hidden absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/60 to-transparent">
+              {foto.descripcion && (
+                <p className="text-white text-xs font-medium truncate">
+                  {foto.descripcion}
+                </p>
+              )}
+            </div>
           </div>
         ))}
       </div>
 
       {selected && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fade-in"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm animate-fade-in"
           onClick={() => setSelected(null)}
         >
           <div
-            className="relative max-w-3xl max-h-[90vh] animate-slide-up"
+            className="relative max-w-3xl w-full mx-4 md:mx-auto animate-slide-up"
             onClick={(e) => e.stopPropagation()}
           >
             <img
               src={selected.url}
               alt={selected.descripcion ?? "Foto"}
-              className="max-w-full max-h-[80vh] rounded-2xl shadow-2xl object-contain"
+              className="w-full max-h-[75vh] md:max-h-[85vh] rounded-2xl shadow-2xl object-contain"
             />
-            <div className="mt-3 flex items-center justify-between text-white">
-              <div>
+            <div className="mt-3 flex items-center justify-between text-white px-1">
+              <div className="min-w-0">
                 {selected.descripcion && (
-                  <p className="font-medium">{selected.descripcion}</p>
+                  <p className="font-medium text-sm md:text-base truncate">{selected.descripcion}</p>
                 )}
-                <p className="text-sm text-white/70">
+                <p className="text-xs md:text-sm text-white/70">
                   {selected.profiles?.nombre} · {new Date(selected.created_at).toLocaleDateString("es-ES", {
                     day: "numeric",
                     month: "long",
@@ -88,7 +95,7 @@ export default function GalleryGrid({
               </div>
               <button
                 onClick={() => setSelected(null)}
-                className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition cursor-pointer"
+                className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition cursor-pointer shrink-0 ml-2"
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="18" y1="6" x2="6" y2="18" />

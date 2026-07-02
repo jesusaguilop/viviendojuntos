@@ -29,13 +29,13 @@ export default function SeccionCard({
 
   return (
     <div className="bg-surface rounded-2xl border border-border overflow-hidden animate-fade-in hover:shadow-sm transition-shadow">
-      <div className="flex items-center justify-between p-4">
+      <div className="flex items-center justify-between p-3 md:p-4">
         <button
           onClick={() => setExpanded(!expanded)}
-          className="flex items-center gap-2 cursor-pointer"
+          className="flex items-center gap-1.5 md:gap-2 cursor-pointer min-h-[44px]"
         >
           <svg
-            className={`transition-transform ${expanded ? "rotate-90" : ""} text-text-secondary`}
+            className={`transition-transform ${expanded ? "rotate-90" : ""} text-text-secondary shrink-0`}
             width="14"
             height="14"
             viewBox="0 0 24 24"
@@ -47,23 +47,23 @@ export default function SeccionCard({
           >
             <polyline points="9 18 15 12 9 6" />
           </svg>
-          <h3 className="font-bold text-text text-lg">{seccion.nombre}</h3>
-          <span className="text-xs text-text-secondary bg-bg px-2 py-0.5 rounded-full">
+          <h3 className="font-bold text-text text-base md:text-lg">{seccion.nombre}</h3>
+          <span className="text-[10px] md:text-xs text-text-secondary bg-bg px-1.5 md:px-2 py-0.5 rounded-full">
             {productos.length}
           </span>
         </button>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 md:gap-2">
           <button
             onClick={() => setShowNewProduct(!showNewProduct)}
-            className="btn-primary text-sm py-1.5 px-3"
+            className="btn-primary text-xs md:text-sm py-1.5 md:py-2 px-2.5 md:px-3 min-h-[36px]"
           >
             + Producto
           </button>
           <form action={eliminarSeccion.bind(null, seccion.id)}>
             <button
               type="submit"
-              className="text-xs text-danger hover:underline cursor-pointer"
+              className="text-xs text-danger hover:underline cursor-pointer min-h-[36px]"
             >
               Eliminar
             </button>
@@ -78,7 +78,7 @@ export default function SeccionCard({
             await crearProducto(fd);
             setShowNewProduct(false);
           }}
-          className="px-4 pb-4 space-y-2 border-b border-border"
+          className="px-3 md:px-4 pb-3 md:pb-4 space-y-2 border-b border-border"
         >
           <div className="grid grid-cols-2 gap-2">
             <input
@@ -86,20 +86,17 @@ export default function SeccionCard({
               name="nombre"
               placeholder="Nombre del producto"
               required
-              className="input-field"
+              className="input-field text-sm"
             />
             <input
               type="number"
               name="precio_estimado"
               step="0.01"
               placeholder="Precio estimado"
-              className="input-field"
+              className="input-field text-sm"
             />
           </div>
-          <button
-            type="submit"
-            className="btn-accent w-full text-sm"
-          >
+          <button type="submit" className="btn-accent w-full text-sm">
             Guardar producto
           </button>
         </form>
@@ -108,46 +105,33 @@ export default function SeccionCard({
       {expanded && productos.length > 0 && (
         <div className="divide-y divide-border">
           {productos.map((producto) => (
-            <div key={producto.id} className="p-4 hover:bg-bg/50 transition">
+            <div key={producto.id} className="p-3 md:p-4 hover:bg-bg/50 transition">
               {editingId === producto.id ? (
-                <EditProductForm
-                  producto={producto}
-                  onDone={() => setEditingId(null)}
-                />
+                <EditProductForm producto={producto} onDone={() => setEditingId(null)} />
               ) : (
-                <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center justify-between gap-2">
                   <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-text">{producto.nombre}</p>
-                    <div className="flex items-center gap-2 text-xs text-text-secondary mt-0.5 flex-wrap">
+                    <p className="font-semibold text-text text-sm md:text-base">{producto.nombre}</p>
+                    <div className="flex items-center gap-1.5 text-[10px] md:text-xs text-text-secondary mt-0.5 flex-wrap">
                       {producto.precio_estimado !== null && (
-                        <span>
-                          Est: ${Number(producto.precio_estimado).toLocaleString("es-ES")}
-                        </span>
+                        <span>Est: ${Number(producto.precio_estimado).toLocaleString("es-ES")}</span>
                       )}
                       {producto.precio_real !== null && (
-                        <span>
-                          Real: ${Number(producto.precio_real).toLocaleString("es-ES")}
-                        </span>
+                        <span>Real: ${Number(producto.precio_real).toLocaleString("es-ES")}</span>
                       )}
                       {producto.notas && (
-                        <span className="italic">&quot;{producto.notas}&quot;</span>
+                        <span className="italic truncate max-w-[120px] md:max-w-none">&quot;{producto.notas}&quot;</span>
                       )}
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2 shrink-0">
+                  <div className="flex items-center gap-1 md:gap-2 shrink-0">
                     <form
-                      action={actualizarEstadoProducto.bind(
-                        null,
-                        producto.id,
-                        rotarEstado(producto.estado),
-                      )}
+                      action={actualizarEstadoProducto.bind(null, producto.id, rotarEstado(producto.estado))}
                     >
                       <button
                         type="submit"
-                        className={`text-xs px-3 py-1 rounded-full font-medium cursor-pointer ${
-                          estadoColors[producto.estado]
-                        }`}
+                        className={`text-[10px] md:text-xs px-2 md:px-3 py-1 rounded-full font-medium cursor-pointer min-h-[32px] ${estadoColors[producto.estado]}`}
                       >
                         {producto.estado}
                       </button>
@@ -155,7 +139,7 @@ export default function SeccionCard({
 
                     <button
                       onClick={() => setEditingId(producto.id)}
-                      className="text-xs text-text-secondary hover:text-primary transition cursor-pointer"
+                      className="text-xs text-text-secondary hover:text-primary transition cursor-pointer min-h-[32px]"
                     >
                       Editar
                     </button>
@@ -163,7 +147,7 @@ export default function SeccionCard({
                     <form action={eliminarProducto.bind(null, producto.id)}>
                       <button
                         type="submit"
-                        className="text-xs text-danger hover:underline cursor-pointer"
+                        className="w-6 h-6 md:w-7 md:h-7 rounded-full bg-danger/10 text-danger flex items-center justify-center text-xs md:text-sm font-bold hover:bg-danger/20 transition cursor-pointer"
                       >
                         ×
                       </button>
@@ -215,7 +199,7 @@ function EditProductForm({
           name="nombre"
           defaultValue={producto.nombre}
           required
-          className="input-field"
+          className="input-field text-sm"
         />
         <input
           type="number"
@@ -223,15 +207,11 @@ function EditProductForm({
           step="0.01"
           defaultValue={producto.precio_estimado ?? ""}
           placeholder="Precio estimado"
-          className="input-field"
+          className="input-field text-sm"
         />
       </div>
       <div className="grid grid-cols-2 gap-2">
-        <select
-          name="estado"
-          defaultValue={producto.estado}
-          className="input-field"
-        >
+        <select name="estado" defaultValue={producto.estado} className="input-field text-sm">
           <option value="pendiente">Pendiente</option>
           <option value="ahorrando">Ahorrando</option>
           <option value="comprado">Comprado</option>
@@ -242,7 +222,7 @@ function EditProductForm({
           step="0.01"
           defaultValue={producto.precio_real ?? ""}
           placeholder="Precio real"
-          className="input-field"
+          className="input-field text-sm"
         />
       </div>
       <input
@@ -250,20 +230,13 @@ function EditProductForm({
         name="notas"
         defaultValue={producto.notas ?? ""}
         placeholder="Notas del producto"
-        className="input-field"
+        className="input-field text-sm"
       />
       <div className="flex gap-2">
-        <button
-          type="submit"
-          className="btn-accent flex-1 text-sm"
-        >
+        <button type="submit" className="btn-accent flex-1 text-sm">
           Guardar
         </button>
-        <button
-          type="button"
-          onClick={onDone}
-          className="btn-outline text-sm"
-        >
+        <button type="button" onClick={onDone} className="btn-outline text-sm">
           Cancelar
         </button>
       </div>

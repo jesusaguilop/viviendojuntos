@@ -117,3 +117,7 @@ body {
 select.input-field {
   @apply appearance-none;
 }
+
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}

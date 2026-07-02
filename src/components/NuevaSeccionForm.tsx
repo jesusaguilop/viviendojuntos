@@ -14,24 +14,24 @@ export default function NuevaSeccionForm() {
         </div>
         <h3 className="font-bold text-text">Nueva sección</h3>
       </div>
-      <div className="flex gap-2">
+      <div className="flex gap-2 flex-wrap">
         <input
           type="text"
           name="nombre"
           placeholder="Ej: Prioritario"
           required
-          className="input-field flex-1"
+          className="input-field flex-1 min-w-[140px]"
         />
         <input
           type="number"
           name="orden"
           placeholder="Ord"
-          className="input-field w-16 text-center"
+          className="input-field w-14 text-center text-sm"
           min="0"
         />
         <button
           type="submit"
-          className="btn-accent whitespace-nowrap"
+          className="btn-accent text-sm"
         >
           Crear
         </button>

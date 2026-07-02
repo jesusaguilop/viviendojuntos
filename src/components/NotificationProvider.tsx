@@ -66,7 +66,7 @@ export default function NotificationProvider({
           const metaNombre = meta?.nombre ?? "una meta";
 
           showNotification({
-            title: "💰 Nuevo aporte",
+            title: "Nuevo aporte",
             body: `${nombre} aportó $${Number(newAporte.monto).toLocaleString("es-ES")} a ${metaNombre}`,
             type: "aporte",
           });
@@ -92,7 +92,7 @@ export default function NotificationProvider({
           const nombre = perfil?.nombre ?? "Alguien";
 
           showNotification({
-            title: "💬 Nuevo mensaje",
+            title: "Nuevo mensaje",
             body: `${nombre}: ${newNota.contenido.slice(0, 80)}${newNota.contenido.length > 80 ? "..." : ""}`,
             type: "nota",
           });
@@ -126,7 +126,7 @@ export default function NotificationProvider({
     <>
       {children}
 
-      <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2 max-w-sm">
+      <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2 max-w-sm md:bottom-4 bottom-20">
         {toasts.map((toast) => (
           <div
             key={toast.id}

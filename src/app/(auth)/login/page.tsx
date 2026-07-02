@@ -107,7 +107,7 @@ export default function LoginPage() {
           </button>
 
           <p className="text-xs text-center text-text-secondary">
-            Hecho con 💕 para dos
+            Hecho para dos
           </p>
         </form>
       </div>
