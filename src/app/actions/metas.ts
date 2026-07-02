@@ -8,11 +8,13 @@ export async function crearMeta(formData: FormData) {
   const nombre = formData.get("nombre") as string;
   const monto_objetivo = parseFloat(formData.get("monto_objetivo") as string);
   const descripcion = (formData.get("descripcion") as string) || null;
+  const fecha_limite = (formData.get("fecha_limite") as string) || null;
 
   const { error } = await supabase.from("metas").insert({
     nombre,
     monto_objetivo,
     descripcion,
+    fecha_limite,
   });
 
   if (error) throw new Error(error.message);

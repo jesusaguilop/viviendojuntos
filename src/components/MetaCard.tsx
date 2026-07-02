@@ -3,6 +3,12 @@ import ProgressBar from "./ProgressBar";
 import { eliminarMeta } from "@/app/actions/metas";
 
 export default function MetaCard({ meta }: { meta: MetaConAportes }) {
+  const diasRestantes = meta.fecha_limite
+    ? Math.ceil(
+        (new Date(meta.fecha_limite).getTime() - Date.now()) / (1000 * 60 * 60 * 24),
+      )
+    : null;
+
   return (
     <div className="bg-surface rounded-2xl border border-border p-5 animate-fade-in hover:shadow-md transition-shadow">
       <div className="flex items-start justify-between mb-3">
@@ -10,6 +16,13 @@ export default function MetaCard({ meta }: { meta: MetaConAportes }) {
           <h3 className="font-bold text-text text-lg">{meta.nombre}</h3>
           {meta.descripcion && (
             <p className="text-xs text-text-secondary mt-0.5">{meta.descripcion}</p>
+          )}
+          {diasRestantes !== null && (
+            <p className={`text-xs font-medium mt-1 ${diasRestantes <= 0 ? "text-danger" : diasRestantes <= 30 ? "text-warning" : "text-accent"}`}>
+              {diasRestantes <= 0
+                ? "⏰ Fecha límite pasada"
+                : `⏱ ${diasRestantes} días restantes`}
+            </p>
           )}
         </div>
         <div className="text-right shrink-0 ml-2">
@@ -19,6 +32,14 @@ export default function MetaCard({ meta }: { meta: MetaConAportes }) {
           <span className="text-text-secondary text-xs block">
             de ${meta.monto_objetivo.toLocaleString()}
           </span>
+          {meta.fecha_limite && (
+            <span className="text-text-secondary text-xs block mt-0.5">
+              {new Date(meta.fecha_limite).toLocaleDateString("es-ES", {
+                day: "numeric",
+                month: "short",
+              })}
+            </span>
+          )}
         </div>
       </div>
 

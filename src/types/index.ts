@@ -10,6 +10,7 @@ export interface Meta {
   nombre: string;
   monto_objetivo: number;
   descripcion: string | null;
+  fecha_limite: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -50,6 +51,15 @@ export interface Nota {
   contenido: string;
   created_at: string;
   profiles?: Pick<Profile, "nombre" | "avatar_color">;
+}
+
+export interface Foto {
+  id: string;
+  usuario_id: string;
+  url: string;
+  descripcion: string | null;
+  created_at: string;
+  profiles?: Pick<Profile, "nombre">;
 }
 
 export type AppStatus = "inicio" | "ahorrando" | "cerca" | "mudanza";

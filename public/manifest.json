@@ -1,0 +1,17 @@
+{
+  "name": "Plan: Viviendo Juntos",
+  "short_name": "VJuntos",
+  "description": "Nuestra app para organizar la mudanza y ahorrar juntos",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fff8f0",
+  "theme_color": "#e8867b",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
