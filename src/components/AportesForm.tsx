@@ -29,7 +29,15 @@ export default function AportesForm({ metas }: { metas: Meta[] }) {
       onSubmit={handleSubmit}
       className="bg-surface rounded-2xl border border-border p-5 space-y-4"
     >
-      <h3 className="font-bold text-text text-lg">Nuevo aporte</h3>
+      <div className="flex items-center gap-2 mb-2">
+        <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
+            <line x1="12" y1="1" x2="12" y2="23" />
+            <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+          </svg>
+        </div>
+        <h3 className="font-bold text-text text-lg">Nuevo aporte</h3>
+      </div>
 
       <div>
         <label className="block text-sm font-medium text-text mb-1">
@@ -42,7 +50,7 @@ export default function AportesForm({ metas }: { metas: Meta[] }) {
           min="0.01"
           required
           placeholder="0.00"
-          className="w-full px-4 py-2.5 rounded-xl border border-border bg-white text-text focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
+          className="input-field"
         />
       </div>
 
@@ -53,7 +61,7 @@ export default function AportesForm({ metas }: { metas: Meta[] }) {
         <select
           name="meta_id"
           required
-          className="w-full px-4 py-2.5 rounded-xl border border-border bg-white text-text focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
+          className="input-field"
         >
           <option value="">Seleccionar meta</option>
           {metas.map((meta) => (
@@ -72,14 +80,14 @@ export default function AportesForm({ metas }: { metas: Meta[] }) {
           type="text"
           name="nota"
           placeholder="Ej: Primer sueldo del mes"
-          className="w-full px-4 py-2.5 rounded-xl border border-border bg-white text-text placeholder:text-text-secondary/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
+          className="input-field"
         />
       </div>
 
       <button
         type="submit"
         disabled={loading}
-        className="w-full py-2.5 rounded-xl bg-primary text-white font-semibold hover:bg-primary-hover disabled:opacity-50 transition cursor-pointer"
+        className="btn-primary w-full"
       >
         {loading ? "Guardando..." : "Agregar aporte"}
       </button>

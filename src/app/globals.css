@@ -1,16 +1,34 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --_bg: #fff8f0;
+  --_surface: #ffffff;
+  --_text: #3d2c2e;
+  --_text-secondary: #8b7e7e;
+  --_border: #f0e6dc;
+}
+
+.dark {
+  --_bg: #0f0f1a;
+  --_surface: #1a1a2e;
+  --_text: #e8e0d8;
+  --_text-secondary: #9e8e8e;
+  --_border: #2a2a3e;
+}
+
 @theme inline {
   --color-primary: #e8867b;
   --color-primary-hover: #d47368;
   --color-secondary: #f4c6a9;
   --color-accent: #7eb5a6;
   --color-accent-hover: #6da394;
-  --color-bg: #fff8f0;
-  --color-surface: #ffffff;
-  --color-text: #3d2c2e;
-  --color-text-secondary: #8b7e7e;
-  --color-border: #f0e6dc;
+  --color-bg: var(--_bg);
+  --color-surface: var(--_surface);
+  --color-text: var(--_text);
+  --color-text-secondary: var(--_text-secondary);
+  --color-border: var(--_border);
   --color-success: #7eb5a6;
   --color-warning: #f4c6a9;
   --color-danger: #e8867b;
@@ -19,9 +37,10 @@
 }
 
 body {
-  background: var(--color-bg);
-  color: var(--color-text);
+  background: var(--_bg);
+  color: var(--_text);
   font-family: var(--font-sans);
+  transition: background-color 0.3s, color 0.3s;
 }
 
 @keyframes fadeIn {
@@ -40,4 +59,61 @@ body {
 
 .animate-slide-up {
   animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-down {
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes pulseSoft {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.animate-pulse-soft {
+  animation: pulseSoft 2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.shimmer-text {
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent), var(--color-primary));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s linear infinite;
+}
+
+.btn-primary {
+  @apply px-5 py-2.5 rounded-xl bg-primary text-white font-semibold hover:bg-primary-hover disabled:opacity-50 transition-all duration-200 cursor-pointer active:scale-95;
+}
+
+.btn-accent {
+  @apply px-5 py-2.5 rounded-xl bg-accent text-white font-semibold hover:bg-accent-hover disabled:opacity-50 transition-all duration-200 cursor-pointer active:scale-95;
+}
+
+.btn-outline {
+  @apply px-4 py-2 rounded-xl border border-border text-text-secondary hover:bg-bg transition-all duration-200 cursor-pointer active:scale-95;
+}
+
+.input-field {
+  @apply w-full px-4 py-2.5 rounded-xl border border-border bg-white text-text placeholder:text-text-secondary/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition;
+}
+
+.dark .input-field {
+  background: var(--_surface);
+  border-color: var(--_border);
+}
+
+select.input-field {
+  @apply appearance-none;
 }

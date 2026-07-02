@@ -24,21 +24,29 @@ export default function SeccionCard({
   const estadoColors: Record<string, string> = {
     pendiente: "bg-secondary/50 text-text",
     ahorrando: "bg-accent/20 text-accent",
-    comprado: "bg-green-100 text-green-700",
+    comprado: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
   };
 
   return (
-    <div className="bg-surface rounded-2xl border border-border overflow-hidden animate-fade-in">
+    <div className="bg-surface rounded-2xl border border-border overflow-hidden animate-fade-in hover:shadow-sm transition-shadow">
       <div className="flex items-center justify-between p-4">
         <button
           onClick={() => setExpanded(!expanded)}
           className="flex items-center gap-2 cursor-pointer"
         >
-          <span
-            className={`transition-transform ${expanded ? "rotate-90" : ""}`}
+          <svg
+            className={`transition-transform ${expanded ? "rotate-90" : ""} text-text-secondary`}
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
-            ▶
-          </span>
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
           <h3 className="font-bold text-text text-lg">{seccion.nombre}</h3>
           <span className="text-xs text-text-secondary bg-bg px-2 py-0.5 rounded-full">
             {productos.length}
@@ -48,7 +56,7 @@ export default function SeccionCard({
         <div className="flex items-center gap-2">
           <button
             onClick={() => setShowNewProduct(!showNewProduct)}
-            className="text-sm px-3 py-1.5 rounded-lg bg-primary text-white font-medium hover:bg-primary-hover transition cursor-pointer"
+            className="btn-primary text-sm py-1.5 px-3"
           >
             + Producto
           </button>
@@ -78,19 +86,19 @@ export default function SeccionCard({
               name="nombre"
               placeholder="Nombre del producto"
               required
-              className="px-3 py-2 rounded-xl border border-border bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+              className="input-field"
             />
             <input
               type="number"
               name="precio_estimado"
               step="0.01"
               placeholder="Precio estimado"
-              className="px-3 py-2 rounded-xl border border-border bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+              className="input-field"
             />
           </div>
           <button
             type="submit"
-            className="w-full py-2 rounded-xl bg-accent text-white font-medium hover:bg-accent-hover transition text-sm cursor-pointer"
+            className="btn-accent w-full text-sm"
           >
             Guardar producto
           </button>
@@ -122,7 +130,7 @@ export default function SeccionCard({
                         </span>
                       )}
                       {producto.notas && (
-                        <span className="italic">"{producto.notas}"</span>
+                        <span className="italic">&quot;{producto.notas}&quot;</span>
                       )}
                     </div>
                   </div>
@@ -207,7 +215,7 @@ function EditProductForm({
           name="nombre"
           defaultValue={producto.nombre}
           required
-          className="px-3 py-2 rounded-xl border border-border bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+          className="input-field"
         />
         <input
           type="number"
@@ -215,14 +223,14 @@ function EditProductForm({
           step="0.01"
           defaultValue={producto.precio_estimado ?? ""}
           placeholder="Precio estimado"
-          className="px-3 py-2 rounded-xl border border-border bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+          className="input-field"
         />
       </div>
       <div className="grid grid-cols-2 gap-2">
         <select
           name="estado"
           defaultValue={producto.estado}
-          className="px-3 py-2 rounded-xl border border-border bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+          className="input-field"
         >
           <option value="pendiente">Pendiente</option>
           <option value="ahorrando">Ahorrando</option>
@@ -234,7 +242,7 @@ function EditProductForm({
           step="0.01"
           defaultValue={producto.precio_real ?? ""}
           placeholder="Precio real"
-          className="px-3 py-2 rounded-xl border border-border bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+          className="input-field"
         />
       </div>
       <input
@@ -242,19 +250,19 @@ function EditProductForm({
         name="notas"
         defaultValue={producto.notas ?? ""}
         placeholder="Notas del producto"
-        className="w-full px-3 py-2 rounded-xl border border-border bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+        className="input-field"
       />
       <div className="flex gap-2">
         <button
           type="submit"
-          className="flex-1 py-2 rounded-xl bg-accent text-white font-medium hover:bg-accent-hover transition text-sm cursor-pointer"
+          className="btn-accent flex-1 text-sm"
         >
           Guardar
         </button>
         <button
           type="button"
           onClick={onDone}
-          className="px-4 py-2 rounded-xl border border-border text-text-secondary hover:bg-bg transition text-sm cursor-pointer"
+          className="btn-outline text-sm"
         >
           Cancelar
         </button>

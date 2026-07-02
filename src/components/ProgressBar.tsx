@@ -9,8 +9,15 @@ export default function ProgressBar({
 }) {
   const heights = { sm: "h-2", md: "h-3", lg: "h-4" };
 
+  const gradient =
+    porcentaje >= 100
+      ? "linear-gradient(90deg, #7eb5a6, #6da394)"
+      : porcentaje >= 50
+        ? "linear-gradient(90deg, #e8867b, #f4c6a9)"
+        : "linear-gradient(90deg, #f4c6a9, #e8867b)";
+
   return (
-    <div className="space-y-1">
+    <div className="space-y-1.5">
       {label && (
         <div className="flex justify-between items-center text-sm">
           <span className="text-text-secondary font-medium">{label}</span>
@@ -18,18 +25,13 @@ export default function ProgressBar({
         </div>
       )}
       <div
-        className={`w-full bg-secondary/50 rounded-full overflow-hidden ${heights[size]}`}
+        className={`w-full bg-secondary/30 rounded-full overflow-hidden ${heights[size]}`}
       >
         <div
-          className={`${heights[size]} rounded-full transition-all duration-700 ease-out`}
+          className={`${heights[size]} rounded-full transition-all duration-700 ease-out shadow-sm`}
           style={{
             width: `${Math.min(porcentaje, 100)}%`,
-            background:
-              porcentaje >= 100
-                ? "linear-gradient(90deg, #7eb5a6, #6da394)"
-                : porcentaje >= 50
-                  ? "linear-gradient(90deg, #e8867b, #f4c6a9)"
-                  : "linear-gradient(90deg, #f4c6a9, #e8867b)",
+            background: gradient,
           }}
         />
       </div>
